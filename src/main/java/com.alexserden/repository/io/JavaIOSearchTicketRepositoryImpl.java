@@ -3,13 +3,14 @@ package repository.io;
 
 import model.Ticket;
 import repository.SearchTicketRepository;
-import repository.buider.CreateTicket;
-import repository.buider.Director;
+import repository.buider.TicketBuilder;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,33 +33,34 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
 
     }
 
-    @Override
-    public Ticket getById(Long id) throws IOException {
-        Director director = new Director();
-        director.setTicketBuilder(new CreateTicket());
-        BufferedReader reader = Files.newBufferedReader(path);
-        Ticket ticket = null;
-        while(reader.ready()) {
-            String[] massTickets = reader.readLine().split(",");
-            if(Long.parseLong(massTickets[0])==id){
-                ticket = director.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3]);
-            }
-        }
-
-        return ticket;
+  @Override
+   public Ticket getById(Long id) throws IOException {
+//        Director director = new Director();
+//        director.setTicketBuilder(new CreateTicket());
+//        BufferedReader reader = Files.newBufferedReader(path);
+       Ticket ticket = null;
+//        while(reader.ready()) {
+//            String[] massTickets = reader.readLine().split(",");
+//            if(Long.parseLong(massTickets[0])==id){
+//                ticket = director.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3]);
+//            }
+//        }
+//
+       return ticket;
     }
 
     @Override
-    public List<Ticket> getAll() throws IOException {
+    public List<Ticket> getAll() throws IOException, ParseException {
 
         List<Ticket> ticketsList = new ArrayList<>();
         BufferedReader reader = Files.newBufferedReader(path);
         Ticket ticket;
         while(reader.ready()){
-            Director director = new Director();
-            director.setTicketBuilder(new CreateTicket());
+           TicketBuilder ticketBuilder = new TicketBuilder();
+
            String [] massTickets = reader.readLine().split(",");
-         ticket = director.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3]);
+         ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4]);
+        ticket =  ticketBuilder.getTicket();
            ticketsList.add(ticket);
         }
         return ticketsList;

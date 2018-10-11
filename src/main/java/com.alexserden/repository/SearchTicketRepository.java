@@ -3,10 +3,11 @@ package repository;
 import model.Ticket;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 
-public interface SearchTicketRepository extends GenericRepository<Ticket, Long> {
+public interface SearchTicketRepository {
     void save(Ticket ticket) throws IOException;
 
     void update(Ticket ticket) throws IOException;
@@ -15,5 +16,5 @@ public interface SearchTicketRepository extends GenericRepository<Ticket, Long> 
 
     Ticket getById(Long id) throws IOException;
 
-    List<Ticket> getAll() throws IOException;
+    List<Ticket> getAll() throws IOException, ParseException;
 }

@@ -4,6 +4,7 @@ import model.Ticket;
 import service.SearchTicketsService;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 public class SearchTicketsController {
@@ -13,15 +14,13 @@ public class SearchTicketsController {
         searchTicketsService = new SearchTicketsService();
     }
 
-    public List<Ticket> searchTicketsByRout(String route) throws IOException {
+    public List<Ticket> searchTicketsByRout(String route) throws IOException, ParseException {
         return searchTicketsService.searchByRoute(route);
     }
 
-    public List<Ticket> searchTicketsByTime(String time) throws IOException {
-        return searchTicketsService.searchByTime(time);
-    }
 
-    public List<Ticket> searchTicketsByType(String type) throws IOException {
+
+    public List<Ticket> searchTicketsByType(String type) throws IOException, ParseException {
         return searchTicketsService.searchByType(type);
 
     }

@@ -1,26 +1,44 @@
 package model;
 
-public class Time extends IdEntity{
-    Long id;
-    String time;
 
-    public Time(Long id, String time) {
-        super(id);
-        this.time = time;
-    }
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public String getTime() {
-        return time;
-    }
+public class Time extends IdEntity {
+    private Long id;
+    Date arrive;
+    Date departure;
 
-    public void setTime(String time) {
-        this.time = time;
+
+    public Time(Long id, Date arrive, Date departure) {
+        this.id = id;
+        this.arrive = arrive;
+        this.departure = departure;
     }
 
     @Override
-    public String toString() {
-        return "Time{" +
-                "time=" + time +
-                '}';
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getArrive() {
+        return arrive;
+    }
+
+    public void setArrive(Date arrive) {
+        this.arrive = arrive;
+    }
+
+    public Date getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(Date departure) {
+        this.departure = departure;
     }
 }
