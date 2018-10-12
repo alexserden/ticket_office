@@ -55,12 +55,33 @@ public class Ticket extends IdEntity{
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ticket ticket = (Ticket) o;
+
+        if (id != null ? !id.equals(ticket.id) : ticket.id != null) return false;
+        if (route != null ? !route.equals(ticket.route) : ticket.route != null) return false;
+        if (time != null ? !time.equals(ticket.time) : ticket.time != null) return false;
+        return type == ticket.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (route != null ? route.hashCode() : 0);
+        result = 31 * result + (time != null ? time.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", route=" + route +
-                ", type=" + type +
-                ", time=" + time +
-                '}';
+        return  id +
+                "," + route.getRoute() +
+                "," + time.arrive +
+                "," + time.departure +
+                "," + type ;
     }
 }
