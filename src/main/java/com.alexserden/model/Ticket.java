@@ -1,33 +1,26 @@
 package model;
 
 
+import java.util.Date;
 
 public class Ticket extends IdEntity{
-    Long id;
+
     private Route route;
-    private Time time;
+    private Date arrive;
+    private Date departure;
     private  Type type;
-
-
+    private TicketStatus ticketStatus;
     public Ticket(){
 
     }
-    public Ticket(Long id, Route route,Time time,Type type) {
+
+    public Ticket(Long id, Route route, Date arrive, Date departure, Type type, TicketStatus ticketStatus) {
         super(id);
         this.route = route;
-        this.time = time;
+        this.arrive = arrive;
+        this.departure = departure;
         this.type = type;
-
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
+        this.ticketStatus = ticketStatus;
     }
 
     public Route getRoute() {
@@ -38,6 +31,22 @@ public class Ticket extends IdEntity{
         this.route = route;
     }
 
+    public Date getArrive() {
+        return arrive;
+    }
+
+    public void setArrive(Date arrive) {
+        this.arrive = arrive;
+    }
+
+    public Date getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(Date departure) {
+        this.departure = departure;
+    }
+
     public Type getType() {
         return type;
     }
@@ -46,12 +55,12 @@ public class Ticket extends IdEntity{
         this.type = type;
     }
 
-    public Time getTime() {
-        return time;
+    public TicketStatus getTicketStatus() {
+        return ticketStatus;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setTicketStatus(TicketStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
     }
 
     @Override
@@ -61,27 +70,31 @@ public class Ticket extends IdEntity{
 
         Ticket ticket = (Ticket) o;
 
-        if (id != null ? !id.equals(ticket.id) : ticket.id != null) return false;
         if (route != null ? !route.equals(ticket.route) : ticket.route != null) return false;
-        if (time != null ? !time.equals(ticket.time) : ticket.time != null) return false;
-        return type == ticket.type;
+        if (arrive != null ? !arrive.equals(ticket.arrive) : ticket.arrive != null) return false;
+        if (departure != null ? !departure.equals(ticket.departure) : ticket.departure != null) return false;
+        if (type != ticket.type) return false;
+        return ticketStatus == ticket.ticketStatus;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (route != null ? route.hashCode() : 0);
-        result = 31 * result + (time != null ? time.hashCode() : 0);
+        int result = route != null ? route.hashCode() : 0;
+        result = 31 * result + (arrive != null ? arrive.hashCode() : 0);
+        result = 31 * result + (departure != null ? departure.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (ticketStatus != null ? ticketStatus.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return  id +
-                "," + route.getRoute() +
-                "," + time.arrive +
-                "," + time.departure +
-                "," + type ;
+        return "Ticket{" +
+                "route=" + route +
+                ", arrive=" + arrive +
+                ", departure=" + departure +
+                ", type=" + type +
+                ", ticketStatus=" + ticketStatus +
+                '}';
     }
 }

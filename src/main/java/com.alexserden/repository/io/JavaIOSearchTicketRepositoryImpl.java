@@ -3,7 +3,7 @@ package repository.io;
 
 import model.Ticket;
 import model.Type;
-import repository.SearchTicketRepository;
+import repository.TicketRepository;
 import repository.buider.TicketBuilder;
 
 import java.io.BufferedReader;
@@ -17,7 +17,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository {
+public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
 
     Path path = Paths.get("src/main/resource/tickets.csv");
 
@@ -25,9 +25,9 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
     public void save(Ticket ticket) throws IOException {
         String text;
         if(ticket.getType()==Type.Business) {
-             text = "\n" + ticket.getRoute().getRoute() + "," + ticket.getTime().getArrive() + "," + ticket.getTime().getDeparture() + ", Business Class";
+             text = "\n" + ticket.getRoute().getRoute() + "," + ticket.getArrive() + "," + ticket.getDeparture() + ", Business Class";
         }else{
-             text = "\n" + ticket.getRoute().getRoute() + "," + ticket.getTime().getArrive() + "," + ticket.getTime().getDeparture() + ", Economy Class";
+             text = "\n" + ticket.getRoute().getRoute() + "," + ticket.getArrive() + "," + ticket.getDeparture() + ", Economy Class";
 
         }
         Files.write(path, text.getBytes(), StandardOpenOption.APPEND);
@@ -41,7 +41,7 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
             TicketBuilder ticketBuilder = new TicketBuilder();
             String[] massTickets = reader.readLine().split(",");
 
-                ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4]);
+                ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5]);
                if(ticket.equals(ticketBuilder.getTicket())) {
                    ticketList.add(ticket);
                }else{
@@ -51,9 +51,9 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
         BufferedWriter writer = Files.newBufferedWriter(path);
         for(Ticket t : ticketList){
             if(t.getType()==Type.Business){
-                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getTime().getArrive()+","+t.getTime().getDeparture()+", Business Class");
+                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getArrive()+","+t.getDeparture()+", Business Class");
             }else{
-                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getTime().getArrive()+","+t.getTime().getDeparture()+", Economy Class");
+                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getArrive()+","+t.getDeparture()+", Economy Class");
 
 
             }
@@ -72,7 +72,7 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
              TicketBuilder ticketBuilder = new TicketBuilder();
              String[] massTickets = reader.readLine().split(",");
              if(Long.parseLong(massTickets[0])!=id){
-                 ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4]);
+                 ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5]);
                  ticketList.add(ticketBuilder.getTicket());
              }
          }
@@ -80,9 +80,9 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
         BufferedWriter writer = Files.newBufferedWriter(path);
          for(Ticket t : ticketList){
              if(t.getType()==Type.Business){
-                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getTime().getArrive()+","+t.getTime().getDeparture()+", Business Class");
+                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getArrive()+","+t.getDeparture()+", Business Class");
              }else{
-                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getTime().getArrive()+","+t.getTime().getDeparture()+", Economy Class");
+                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getArrive()+","+t.getDeparture()+", Economy Class");
 
 
              }
@@ -102,7 +102,7 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
             TicketBuilder ticketBuilder = new TicketBuilder();
             String[] massTickets = reader.readLine().split(",");
             if(Long.parseLong(massTickets[0])==id){
-                ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4]);
+                ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5]);
                 ticket = ticketBuilder.getTicket();
                 }
         }
@@ -121,7 +121,7 @@ public class JavaIOSearchTicketRepositoryImpl implements SearchTicketRepository 
            TicketBuilder ticketBuilder = new TicketBuilder();
 
            String [] massTickets = reader.readLine().split(",");
-         ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4]);
+         ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5]);
         ticket =  ticketBuilder.getTicket();
            ticketsList.add(ticket);
         }

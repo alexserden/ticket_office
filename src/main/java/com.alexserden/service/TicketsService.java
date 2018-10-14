@@ -2,8 +2,9 @@ package service;
 
 
 import model.Ticket;
+import model.TicketStatus;
 import model.Type;
-import repository.SearchTicketRepository;
+import repository.TicketRepository;
 import repository.io.JavaIOSearchTicketRepositoryImpl;
 
 import java.io.IOException;
@@ -12,16 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicketsService {
-    SearchTicketRepository searchTicketRepository;
+    TicketRepository searchTicketRepository;
 
     public TicketsService() {
         searchTicketRepository = new JavaIOSearchTicketRepositoryImpl();
     }
 
-    public Ticket BuyTicket(Long id) {
+    public Ticket buyTicket(Long id) {
         Ticket ticket = null;
         try {
             ticket = searchTicketRepository.getById(id);
+            ticket.setTicketStatus(TicketStatus.Bought);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -30,10 +32,16 @@ public class TicketsService {
         return ticket;
     }
 
-    public void returnTicket(Ticket ticket) {
+    public void returnTicket(Long id) {
+        Ticket ticket;
         try {
+            ticket = searchTicketRepository.getById(id);
             searchTicketRepository.save(ticket);
+            ticket.setTicketStatus(TicketStatus.Return);
+
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }

@@ -32,8 +32,8 @@ public class TicketView {
         }
 
     }
-    public void returnTicket(String name){
+    public void returnTicket(Long id){
         Ticket ticket = null;
-        ticketController.returnTicket(ticket);
+        ticketController.returnTicket(id);
     }
 }

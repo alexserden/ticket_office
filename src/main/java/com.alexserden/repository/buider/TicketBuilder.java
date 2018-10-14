@@ -1,8 +1,8 @@
 package repository.buider;
 
+import model.Airport;
 import model.Route;
 import model.Ticket;
-import model.Time;
 import model.Type;
 
 import java.text.ParseException;
@@ -15,29 +15,24 @@ public  class TicketBuilder {
     public TicketBuilder(){
         ticket = new Ticket();
     }
-   public void createTicket(Long id,String route,String arrive,String departure,String type) throws ParseException {
+   public void createTicket(Long id, String route, String airoport,String arrive, String departure, String type) throws ParseException {
        ticket.setId(id);
-        buildRoute(id,route);
-       buildTime(id, arrive, departure);
+        buildRoute(id,route,airoport);
        buildType(type);
+       SimpleDateFormat arr = new SimpleDateFormat();
+       arr.applyPattern("dd.MM.yyyy");
+       Date arriveDate = arr.parse(arrive);
+
+       SimpleDateFormat depart= new SimpleDateFormat();
+       depart.applyPattern("dd.MM.yyyy");
+       Date departureDate = depart.parse(departure);
     }
 
-    public void buildRoute(Long id, String route) {
+    public void buildRoute(Long id, String route,String name) {
 
-        ticket.setRoute(new Route(id,route));
+        ticket.setRoute(new Route(id,route,new Airport(id,name)));
     }
 
-    public void buildTime(Long id, String arrive, String departure) throws ParseException {
-        SimpleDateFormat arr = new SimpleDateFormat();
-        arr.applyPattern("dd.MM.yyyy");
-        Date arriveDate = arr.parse(arrive);
-
-        SimpleDateFormat depart= new SimpleDateFormat();
-        depart.applyPattern("dd.MM.yyyy");
-        Date departureDate = depart.parse(departure);
-
-        ticket.setTime(new Time(id,arriveDate,departureDate));
-    }
 
     public void buildType(String type) {
 

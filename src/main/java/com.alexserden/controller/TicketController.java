@@ -15,10 +15,10 @@ public class TicketController {
     }
 
     public Ticket byuTicket(Long id) {
-        return ticketsService.BuyTicket(id);
+        return ticketsService.buyTicket(id);
     }
-    public void returnTicket(Ticket ticket){
-         ticketsService.returnTicket(ticket);
+    public void returnTicket(Long id){
+         ticketsService.returnTicket(id);
     }
 
 

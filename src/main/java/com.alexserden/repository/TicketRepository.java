@@ -7,12 +7,12 @@ import java.text.ParseException;
 import java.util.List;
 
 
-public interface SearchTicketRepository {
+public interface TicketRepository extends GenericRepository<Ticket,Long>{
     void save(Ticket ticket) throws IOException;
 
-    void update(Ticket ticket) throws IOException, ParseException;
+    void update(Ticket ticket) throws IOException,ParseException;
 
-    void delete(Long id) throws IOException, ParseException;
+    void delete(Long id) throws IOException,ParseException;
 
     Ticket getById(Long id) throws IOException, ParseException;
 
