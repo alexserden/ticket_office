@@ -2,6 +2,7 @@ package view;
 
 import controller.TicketController;
 import model.Ticket;
+import repository.exception.NoVacanciesException;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -15,7 +16,12 @@ public class TicketView {
     }
     public void buyTicket(Long id){
 
-        Ticket ticket = ticketController.byuTicket(id);
+        Ticket ticket = null;
+        try {
+            ticket = ticketController.byuTicket(id);
+        } catch (NoVacanciesException e) {
+            e.printStackTrace();
+        }
         System.out.println(ticket.toString());
     }
     public void searchByRoute(String route) throws IOException, ParseException {

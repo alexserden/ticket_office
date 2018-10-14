@@ -10,6 +10,7 @@ public class Ticket extends IdEntity{
     private Date departure;
     private  Type type;
     private TicketStatus ticketStatus;
+    private int vacancies = 10;
     public Ticket(){
 
     }
@@ -21,6 +22,12 @@ public class Ticket extends IdEntity{
         this.departure = departure;
         this.type = type;
         this.ticketStatus = ticketStatus;
+    }
+    public int getVacancies(){
+        return vacancies;
+    }
+    public void setVacancies(int vacancies){
+         this.vacancies = vacancies;
     }
 
     public Route getRoute() {

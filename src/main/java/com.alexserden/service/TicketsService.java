@@ -5,6 +5,7 @@ import model.Ticket;
 import model.TicketStatus;
 import model.Type;
 import repository.TicketRepository;
+import repository.exception.NoVacanciesException;
 import repository.io.JavaIOSearchTicketRepositoryImpl;
 
 import java.io.IOException;
@@ -19,11 +20,16 @@ public class TicketsService {
         searchTicketRepository = new JavaIOSearchTicketRepositoryImpl();
     }
 
-    public Ticket buyTicket(Long id) {
+    public Ticket buyTicket(Long id) throws NoVacanciesException {
         Ticket ticket = null;
         try {
             ticket = searchTicketRepository.getById(id);
             ticket.setTicketStatus(TicketStatus.Bought);
+            if (ticket.getVacancies()!=0){
+            ticket.setVacancies(ticket.getVacancies()-1);
+            }else{
+                    throw new NoVacanciesException();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -38,6 +44,7 @@ public class TicketsService {
             ticket = searchTicketRepository.getById(id);
             searchTicketRepository.save(ticket);
             ticket.setTicketStatus(TicketStatus.Return);
+            ticket.setVacancies(ticket.getVacancies()+1);
 
         } catch (IOException e) {
             e.printStackTrace();

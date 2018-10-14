@@ -1,6 +1,7 @@
 package controller;
 
 import model.Ticket;
+import repository.exception.NoVacanciesException;
 import service.TicketsService;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class TicketController {
         ticketsService = new TicketsService();
     }
 
-    public Ticket byuTicket(Long id) {
+    public Ticket byuTicket(Long id) throws NoVacanciesException {
         return ticketsService.buyTicket(id);
     }
     public void returnTicket(Long id){
