@@ -5,12 +5,15 @@ package model;
 
 public class Route extends IdEntity {
     private String route;
-    Airport name;
+    Airport Departure;
+    Airport Arrival;
 
-    public Route(Long id, String route, Airport name) {
+
+    public Route(Long id, String route, Airport departure, Airport arrival) {
         super(id);
         this.route = route;
-        this.name = name;
+        Departure = departure;
+        Arrival = arrival;
     }
 
     public String getRoute() {
@@ -21,6 +24,21 @@ public class Route extends IdEntity {
         this.route = route;
     }
 
+    public Airport getDeparture() {
+        return Departure;
+    }
+
+    public void setDeparture(Airport departure) {
+        Departure = departure;
+    }
+
+    public Airport getArrival() {
+        return Arrival;
+    }
+
+    public void setArrival(Airport arrival) {
+        Arrival = arrival;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -30,13 +48,15 @@ public class Route extends IdEntity {
         Route route1 = (Route) o;
 
         if (route != null ? !route.equals(route1.route) : route1.route != null) return false;
-        return name != null ? name.equals(route1.name) : route1.name == null;
+        if (Departure != null ? !Departure.equals(route1.Departure) : route1.Departure != null) return false;
+        return Arrival != null ? Arrival.equals(route1.Arrival) : route1.Arrival == null;
     }
 
     @Override
     public int hashCode() {
         int result = route != null ? route.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (Departure != null ? Departure.hashCode() : 0);
+        result = 31 * result + (Arrival != null ? Arrival.hashCode() : 0);
         return result;
     }
 
@@ -44,7 +64,8 @@ public class Route extends IdEntity {
     public String toString() {
         return "Route{" +
                 "route='" + route + '\'' +
-                ", name=" + name +
+                ", Departure=" + Departure +
+                ", Arrival=" + Arrival +
                 '}';
     }
 }

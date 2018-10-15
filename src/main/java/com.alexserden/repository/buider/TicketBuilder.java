@@ -15,22 +15,27 @@ public  class TicketBuilder {
     public TicketBuilder(){
         ticket = new Ticket();
     }
-   public void createTicket(Long id, String route, String airoport,String arrive, String departure, String type) throws ParseException {
+   public void createTicket(Long id, String route,String depatureAirport,String arrivalAirport,
+                            String departureDate,String arrivalDate, String type) throws ParseException {
        ticket.setId(id);
-        buildRoute(id,route,airoport);
+        buildRoute(id,route,depatureAirport,arrivalAirport,departureDate,arrivalDate);
        buildType(type);
-       SimpleDateFormat arr = new SimpleDateFormat();
+    }
+
+    public void buildRoute(Long id, String route,String depatureAirport,String arrivalAirport,
+                           String departureDate,String arrivalDate) throws ParseException {
+
+               SimpleDateFormat arr = new SimpleDateFormat();
        arr.applyPattern("dd.MM.yyyy");
-       Date arriveDate = arr.parse(arrive);
+       Date arrival = arr.parse(arrivalDate);
 
        SimpleDateFormat depart= new SimpleDateFormat();
        depart.applyPattern("dd.MM.yyyy");
-       Date departureDate = depart.parse(departure);
-    }
+       Date departure = depart.parse(departureDate);
 
-    public void buildRoute(Long id, String route,String name) {
-
-        ticket.setRoute(new Route(id,route,new Airport(id,name)));
+          Airport airportDep = new Airport(id,depatureAirport,departure);
+          Airport airportArr = new Airport(id,arrivalAirport,arrival);
+        ticket.setRoute(new Route(id,route,airportDep,airportArr));
     }
 
 
