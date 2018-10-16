@@ -25,7 +25,11 @@ public class TicketsService {
         try {
             ticket = searchTicketRepository.getById(id);
             ticket.setTicketStatus(TicketStatus.Bought);
-
+            if (ticket.getAircraft().getVacancies()!=0){
+            ticket.getAircraft().setVacancies(ticket.getAircraft().getVacancies()-1);
+            }else{
+                    throw new NoVacanciesException();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -40,7 +44,7 @@ public class TicketsService {
             ticket = searchTicketRepository.getById(id);
             searchTicketRepository.save(ticket);
             ticket.setTicketStatus(TicketStatus.Return);
-
+            ticket.getAircraft().setVacancies(ticket.getAircraft().getVacancies()+1);
 
         } catch (IOException e) {
             e.printStackTrace();

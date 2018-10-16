@@ -1,9 +1,6 @@
 package repository.buider;
 
-import model.Airport;
-import model.Route;
-import model.Ticket;
-import model.Type;
+import model.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +17,7 @@ public  class TicketBuilder {
    public void createTicket(Long id, String route,String depatureAirport,String arrivalAirport,
                             String departureDate,String arrivalDate, String type,String aircraft,int vacancies) throws ParseException {
        ticket.setId(id);
+       ticket.setAircraft(new Aircraft(id,aircraft,vacancies));
         buildRoute(id,route,depatureAirport,arrivalAirport,departureDate,arrivalDate);
        buildType(type);
     }
