@@ -8,6 +8,8 @@ import model.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public  class TicketBuilder {
     Ticket ticket;
@@ -24,18 +26,18 @@ public  class TicketBuilder {
 
     public void buildRoute(Long id, String route,String depatureAirport,String arrivalAirport,
                            String departureDate,String arrivalDate) throws ParseException {
+        Map<Airport,Date> map = new HashMap<Airport,Date>();
+        SimpleDateFormat arr = new SimpleDateFormat();
+        arr.applyPattern("dd.MM.yyyy");
+        Date arrival = arr.parse(arrivalDate);
 
-               SimpleDateFormat arr = new SimpleDateFormat();
-       arr.applyPattern("dd.MM.yyyy");
-       Date arrival = arr.parse(arrivalDate);
+        SimpleDateFormat depart= new SimpleDateFormat();
+        depart.applyPattern("dd.MM.yyyy");
+        Date departure = depart.parse(departureDate);
+        map.put(new Airport(id,arrivalAirport),arrival);
+        map.put(new Airport(id,depatureAirport),departure);
 
-       SimpleDateFormat depart= new SimpleDateFormat();
-       depart.applyPattern("dd.MM.yyyy");
-       Date departure = depart.parse(departureDate);
-
-          Airport airportDep = new Airport(id,depatureAirport,departure);
-          Airport airportArr = new Airport(id,arrivalAirport,arrival);
-        ticket.setRoute(new Route(id,route,airportDep,airportArr));
+        ticket.setRoute(new Route(id,route,map));
     }
 
 

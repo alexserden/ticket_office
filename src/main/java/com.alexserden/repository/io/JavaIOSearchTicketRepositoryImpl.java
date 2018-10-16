@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
 
     Path path = Paths.get("src/main/resource/tickets.csv");
@@ -25,11 +27,9 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
     public void save(Ticket t) throws IOException {
         String text;
         if(t.getType()==Type.Business) {
-             text = "\n" + t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getDeparture()+","+
-                     t.getRoute().getArrival()+","+t.getRoute().getDeparture().getDate()+","+t.getRoute().getArrival().getDate()+", Business Class";
+             text = "\n" +t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getMap()+", Business Class";
         }else{
-             text = "\n"+ t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getDeparture()+","+
-                    t.getRoute().getArrival()+","+t.getRoute().getDeparture().getDate()+","+t.getRoute().getArrival().getDate() + ", Economy Class";
+             text = "\n" +t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getMap()+", Economy Class";
 
         }
         Files.write(path, text.getBytes(), StandardOpenOption.APPEND);
@@ -53,12 +53,9 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
         BufferedWriter writer = Files.newBufferedWriter(path);
         for(Ticket t : ticketList){
             if(t.getType()==Type.Business){
-                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getDeparture()+","+
-                        t.getRoute().getArrival()+","+t.getRoute().getDeparture().getDate()+","+t.getRoute().getArrival().getDate()+", Business Class");
+                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getMap()+", Business Class");
             }else{
-                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getDeparture()+","+
-                        t.getRoute().getArrival()+","+t.getRoute().getDeparture().getDate()+","+t.getRoute().getArrival().getDate()+", Economy Class");
-
+                writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getMap()+", Economy Class");
             }
 
         }
@@ -83,11 +80,9 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
         BufferedWriter writer = Files.newBufferedWriter(path);
          for(Ticket t : ticketList){
              if(t.getType()==Type.Business){
-                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getDeparture()+","+
-                         t.getRoute().getArrival()+","+t.getRoute().getDeparture().getDate()+","+t.getRoute().getArrival().getDate()+", Business Class");
+                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getMap()+", Business Class");
              }else{
-                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getDeparture()+","+
-                         t.getRoute().getArrival()+","+t.getRoute().getDeparture().getDate()+","+t.getRoute().getArrival().getDate()+", Economy Class");
+                 writer.write(t.getId()+","+t.getRoute().getRoute()+","+t.getRoute().getMap()+", Economy Class");
 
              }
 
