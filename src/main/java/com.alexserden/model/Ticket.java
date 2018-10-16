@@ -3,6 +3,7 @@ package model;
 public class Ticket extends IdEntity{
 
     private Route route;
+    private Aircraft aircraft;
     private  Type type;
     private TicketStatus ticketStatus;
 
@@ -10,13 +11,13 @@ public class Ticket extends IdEntity{
 
     }
 
-    public Ticket(Long id, Route route,Type type, TicketStatus ticketStatus) {
+    public Ticket(Long id, Route route, Aircraft aircraft, Type type, TicketStatus ticketStatus) {
         super(id);
         this.route = route;
+        this.aircraft = aircraft;
         this.type = type;
         this.ticketStatus = ticketStatus;
     }
-
 
     public Route getRoute() {
         return route;
@@ -26,6 +27,13 @@ public class Ticket extends IdEntity{
         this.route = route;
     }
 
+    public Aircraft getAircraft() {
+        return aircraft;
+    }
+
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
+    }
 
     public Type getType() {
         return type;

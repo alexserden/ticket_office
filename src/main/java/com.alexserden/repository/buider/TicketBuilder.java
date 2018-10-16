@@ -18,7 +18,7 @@ public  class TicketBuilder {
         ticket = new Ticket();
     }
    public void createTicket(Long id, String route,String depatureAirport,String arrivalAirport,
-                            String departureDate,String arrivalDate, String type) throws ParseException {
+                            String departureDate,String arrivalDate, String type,String aircraft,int vacancies) throws ParseException {
        ticket.setId(id);
         buildRoute(id,route,depatureAirport,arrivalAirport,departureDate,arrivalDate);
        buildType(type);

@@ -43,7 +43,7 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
             TicketBuilder ticketBuilder = new TicketBuilder();
             String[] massTickets = reader.readLine().split(",");
 
-            ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6]);
+            ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6],massTickets[7],Integer.parseInt(massTickets[8]));
                if(ticket.equals(ticketBuilder.getTicket())) {
                    ticketList.add(ticket);
                }else{
@@ -72,7 +72,7 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
              TicketBuilder ticketBuilder = new TicketBuilder();
              String[] massTickets = reader.readLine().split(",");
              if(Long.parseLong(massTickets[0])!=id){
-                 ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6]);
+                 ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6],massTickets[7],Integer.parseInt(massTickets[8]));
                  ticketList.add(ticketBuilder.getTicket());
              }
          }
@@ -101,7 +101,7 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
             TicketBuilder ticketBuilder = new TicketBuilder();
             String[] massTickets = reader.readLine().split(",");
             if(Long.parseLong(massTickets[0])==id){
-                ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6]);
+                ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6],massTickets[7],Integer.parseInt(massTickets[8]));
                 ticket = ticketBuilder.getTicket();
                 }
         }
@@ -120,7 +120,7 @@ public class JavaIOSearchTicketRepositoryImpl implements TicketRepository {
            TicketBuilder ticketBuilder = new TicketBuilder();
 
            String [] massTickets = reader.readLine().split(",");
-         ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6]);
+            ticketBuilder.createTicket(Long.parseLong(massTickets[0]),massTickets[1],massTickets[2],massTickets[3],massTickets[4],massTickets[5],massTickets[6],massTickets[7],Integer.parseInt(massTickets[8]));
         ticket =  ticketBuilder.getTicket();
            ticketsList.add(ticket);
         }
